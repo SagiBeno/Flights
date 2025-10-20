@@ -19,6 +19,8 @@ app.post("/login", (req, res) => {
     }
 })
 
+//TODO app.post(/register
+
 const port = 3333
 
 app.listen(port, () => {
