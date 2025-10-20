@@ -18,15 +18,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(true); // TODO - start with false and implement Login
+  const [loggedIn, setLoggedIn] = useState(false); // TODO - start with false and implement Login
 
   return (
     <Router>
       {loggedIn && <NavbarMenu onLogout={() => setLoggedIn(false)} />}
       <Routes>
-        <Route path="/" element=
-          {loggedIn ? <Navigate to="/destinations" /> : <Login onLogin={() => setLoggedIn(true)} />} />
-
+        <Route path="/" element={loggedIn ? <Navigate to="/destinations" /> : <Login onLogin={() => setLoggedIn(true)} />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/flight-info" element={<FlightInfo />} />
         <Route path="/tickets" element={<Tickets />} />
