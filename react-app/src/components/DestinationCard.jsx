@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Form, Row, Col } from "react-bootstrap";
 
 export default function DestinationCard(props) {
-    // greaceful prop error handling:
+    // greaceful props error handling:
     let city = { image: '', name: '', country: '' }
     if (props.city) city = props.city
 
