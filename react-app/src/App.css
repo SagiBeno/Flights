@@ -45,5 +45,6 @@
 
 
 body {
-  padding-top: 1px; /* TODO - Adjust based on navbar height */
+  padding-top: 56px; /* TODO - Adjust based on navbar height */
+  overflow-x: scroll;
 }
