@@ -1,6 +1,5 @@
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from "react"
+import { Button, Form} from 'react-bootstrap';
 
 export default function LoginForm(props) {
     const [username, setUsername] = useState("")
@@ -9,36 +8,51 @@ export default function LoginForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch()// TODO - implement login fetch to backend
+        fetch('http://localhost:3333/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(response => {
+            if (response.ok) {
+                props.onLogin(true);
+            } 
+            else {
+                // Handle login error
+            }
+        })
+        .catch(error => {
+            console.error('Error during login:', error);
+        });
+    }
+
+    const handleEmailChange = e => {
+        setEmail(e.target.value)
+        console.log(email)
+    }
+
+    const handlePasswordChange = e => {
+        setPassword(e.target.value)
+        console.log(password)
     }
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="email-input">Email:</InputGroup.Text>
-                    <Form.Control
-                        type="email"
-                        placeholder="Email"
-                        aria-label="Email"
-                        aria-describedby="email-input"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="password-input">Password:</InputGroup.Text>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        aria-label="Password"
-                        aria-describedby="basic-addon2"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </InputGroup>
-                <button type="submit">Login</button>
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="name@example.com" onChange={handleEmailChange} required/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} required/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Login
+                </Button>
+            </Form>
         </>
     )
 }
