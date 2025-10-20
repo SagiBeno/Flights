@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import TicketForm from "../components/TicketForm";
 
 export default function Tickets() {
   const [basket, setBasket] = useState([]);
@@ -12,7 +11,7 @@ export default function Tickets() {
 
   return (
     <div className="container">
-      <TicketForm onSubmit={handleSubmit} />
+      {/*<TicketForm onSubmit={handleSubmit} />*/}
 
       <h4 className="mt-4">Your Basket</h4>
       <ListGroup>

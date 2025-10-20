@@ -26,7 +26,7 @@ export default function Destinations() {
 
   const handleCityFilter = (filter) => {
     const lowerFilter = filter.toLowerCase();
-    const filtered = cities.filter(city =>
+    const filtered = citiesData.filter(city =>
       city.name.toLowerCase().includes(lowerFilter) ||
       city.country.toLowerCase().includes(lowerFilter)
     );
@@ -44,7 +44,7 @@ export default function Destinations() {
       />
       <Row>
         {filteredCities.map((city, idx) => (
-          <Col key={idx}>{/* TODO ez ilyen frontendes cuccos lécci Benőőőő :333  alapból volt még rajta: md={4}*/}
+          <Col key={idx} md={4}>{/* TODO ez ilyen frontendes cuccos lécci Benőőőő :333  alapból volt még rajta: md={4}*/}
             {/*apply DestinationCard*/}
             <DestinationCard city={city} />
           </Col>
