@@ -10,9 +10,17 @@ const cities = [
 ];
 
 export default function Destinations() {
-  const [filter, setFilter] = useState("");
+  const [filteredCities, setFilteredCities] = useState(cities);
 
-  const filteredCities = cities // TODO filter cities if include filter value
+  const handleCityFilter = (filter) => {
+    const lowerFilter = filter.toLowerCase();
+    const filtered = cities.filter(city =>
+      city.name.toLowerCase().includes(lowerFilter) ||
+      city.country.toLowerCase().includes(lowerFilter)
+    );
+    console.log("Filtered Cities:", filtered);
+    setFilteredCities(filtered);
+  }
 
   return (
     <div className="container">
@@ -20,12 +28,12 @@ export default function Destinations() {
         type="text"
         placeholder="Filter by city or country..."
         className="mb-3"
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={(e) => handleCityFilter(e.target.value)}
       />
       <Row>
         {filteredCities.map((city, idx) => (
-          <Col md={4} key={idx}>
-            {/* apply DestinationCard */}
+          <Col key={idx}>{/* TODO ez ilyen frontendes cuccos lécci Benőőőő :333  alapból volt még rajta: md={4}*/}
+            {/*apply DestinationCard*/}
             <DestinationCard city={city} />
           </Col>
         ))}
