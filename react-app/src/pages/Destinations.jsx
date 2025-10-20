@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Row, Col } from "react-bootstrap";
+import DestinationCard from "../components/DestinationCard";
 
 const cities = [
   { name: "Paris", country: "France", image: "TODO-add-static-img-url-paris.jpg" },
@@ -24,14 +25,8 @@ export default function Destinations() {
       <Row>
         {filteredCities.map((city, idx) => (
           <Col md={4} key={idx}>
-            {/* TODO - apply DestinationCard */}
-            <Card className="mb-3 shadow-sm">
-              <Card.Img variant="top" src={city.image} />
-              <Card.Body>
-                <Card.Title>{city.name}</Card.Title>
-                <Card.Text>{city.country}</Card.Text>
-              </Card.Body>
-            </Card>
+            {/* apply DestinationCard */}
+            <DestinationCard city={city} />
           </Col>
         ))}
       </Row>
