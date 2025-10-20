@@ -48,3 +48,7 @@ body {
   padding-top: 56px; /* Adjust based on navbar height */
   overflow-y: scroll;
 }
+
+.logoutButton {
+  cursor: pointer;
+}

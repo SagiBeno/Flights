@@ -1,29 +1,26 @@
 import { Table } from "react-bootstrap";
 import FlightTable from "../components/FlightTable";
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 
-const flights = [
-  { from: "Paris", to: "Tokyo", flight: "AF274", depart: "10:30", arrive: "04:45", price: "€850" },
-  { from: "New York", to: "Rome", flight: "DL198", depart: "13:00", arrive: "02:15", price: "$750" },
-  { from: "TODO", to: "GET", flight: "fromBackend", depart: "12:34", arrive: "21:09", price: "$1" },
-];
+
 
 export default function FlightInfo() {
+  const [flights, setFlights] = useState([]);
+
   useEffect( () => {
     getData();
   }, [])
 
   const getData = async () => {
-    await fetch('', {method: 'GET'})
+    await fetch('http://localhost:3333/flight-info')
     .then(res => res.json())
-    .then(console.log(res))
+    .then(data => setFlights(data.flights))
     .catch(console.warn)
   }
 
   return (
     <div className="container">
       <h3>Available Flights</h3>
-      {/* apply FlightTable */}
       {flights.map((flight, index) => (
         <FlightTable key={index} flight={flight} />
       ))}
