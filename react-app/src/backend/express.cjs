@@ -32,8 +32,18 @@ const cities = [
   { name: "Iklódbördőce", country: "GET", image: "cities-from-backend.jpg" },
 ];
 
-app.post("/destinations",(req, res) => {
-    res.status(200).json()
+const flights = [
+  { from: "Paris", to: "Tokyo", flight: "AF274", depart: "10:30", arrive: "04:45", price: "€850" },
+  { from: "New York", to: "Rome", flight: "DL198", depart: "13:00", arrive: "02:15", price: "$750" },
+  { from: "TODO", to: "GET", flight: "fromBackend", depart: "12:34", arrive: "21:09", price: "$1" },
+];
+
+app.get("/destinations",(req, res) => {
+    res.status(200).json( { cities } )
+})
+
+app.get('/flight-info', (req, res) => {
+    res.status(200).json({ flights })
 })
 
 app.listen(port, () => {
