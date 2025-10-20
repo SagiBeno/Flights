@@ -12,7 +12,6 @@ import FlightInfo from "./pages/FlightInfo";
 import Tickets from "./pages/Tickets";
 import NavbarMenu from "./components/NavbarMenu";
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
