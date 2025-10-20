@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Button, Form} from 'react-bootstrap';
 
 export default function LoginForm(props) {
+    const [invalidLogin, setInvalidLogin] = useState(false)
+
     const handleSubmit = e => {
         e.preventDefault()
 
@@ -10,7 +12,6 @@ export default function LoginForm(props) {
         const email = formElements.formEmail.value
         const password = formElements.formPassword.value
 
-        /*
         fetch('http://localhost:3333/login', {
             method: 'POST',
             headers: {
@@ -18,18 +19,16 @@ export default function LoginForm(props) {
             },
             body: JSON.stringify({ email: email, password: password })
         })
-        .then(response => {
+        .then(async response => {
             if (response.ok) {
-                props.onLogin(true);
+                const data = await response.json();
+                props.onLogin(data.user);
             } 
-            else {
-                console.warn('Login failed');
-            }
         })
         .catch(error => {
             console.error('Error during login:', error);
         });
-        */
+        
     }
 
     return (
@@ -45,6 +44,7 @@ export default function LoginForm(props) {
             <Button variant="primary" type="submit">
                 Login
             </Button>
+            {invalidLogin && <p className="text-danger mt-3">Invalid email or password</p>}
         </Form>
     )
 }
