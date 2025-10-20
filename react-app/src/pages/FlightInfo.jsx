@@ -13,9 +13,10 @@ export default function FlightInfo() {
     getData();
   }, [])
 
-  const getData = () => {
-    fetch('', {method: 'GET'})
-    .then()
+  const getData = async () => {
+    await fetch('', {method: 'GET'})
+    .then(res => res.json())
+    .then(console.log(res))
     .catch(console.warn)
   }
 
