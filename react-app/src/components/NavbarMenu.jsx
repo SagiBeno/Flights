@@ -18,19 +18,15 @@ export default function NavbarMenu({ onLogout, userName }) {
           Jet4holidays
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/destinations">Destinations</Nav.Link>
             <Nav.Link as={Link} to="/flight-info">Flight Info</Nav.Link>
             <Nav.Link as={Link} to="/tickets">Tickets</Nav.Link>
-            
           </Nav>
-
-           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
+          <Navbar.Text>
               Signed in as: <a href="/" onClick={onLogout} className="logoutButton">{userName}</a>
-            </Navbar.Text>
-           </Navbar.Collapse>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>
