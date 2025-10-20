@@ -1,9 +1,11 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const path = require("path")
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static(path.join(process.cwd(), "public")))
 
 const users = [ //TODO adatbázis kéne ide sztem
     { username: 'JohnDoe', email: 'JohnDoe@example.com' , password: '12345678' }
@@ -24,12 +26,12 @@ app.post("/login", (req, res) => {
 const port = 3333
 
 const cities = [
-  { name: "Paris", country: "France", image: "TODO-add-static-img-url-paris.jpg" },
-  { name: "Tokyo", country: "Japan", image: "TODO-add-static-img-url-tokyo.jpg" },
-  { name: "New York", country: "USA", image: "TODO-add-static-img-url-newyork.jpg" },
-  { name: "Lipseszentadorján", country: "GET", image: "cities-from-backend.jpg" },
-  { name: "Kazincbarcika", country: "GET", image: "cities-from-backend.jpg" },
-  { name: "Iklódbördőce", country: "GET", image: "cities-from-backend.jpg" },
+  { name: "Paris", country: "France", image: "/paris.jpg" },
+  { name: "Tokyo", country: "Japan", image: "/tokyo.jpg" },
+  { name: "New York", country: "USA", image: "/newyork.jpg" },
+  { name: "Lipseszentadorján", country: "Hungary", image: "/lipseszentadorjan.jpg" },
+  { name: "Kazincbarcika", country: "Hungary", image: "/kazincbarcika.jpg" },
+  { name: "Iklódbördőce", country: "Hungary", image: "/iklodbordoce.jpg" },
 ];
 
 const flights = [

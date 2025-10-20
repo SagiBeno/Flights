@@ -5,10 +5,23 @@ import DestinationCard from "../components/DestinationCard";
 
 export default function Destinations() {
   const [citiesData, setCitiesData] = useState([]);
-  const [filteredCities, setFilteredCities] = useState(citiesData);
+  const [filteredCities, setFilteredCities] = useState([]);
 
   useEffect( () => {
-    fetch()
+    async function fetchData() {
+      await fetch("http://localhost:3333/destinations", {
+        method: "GET"
+      })
+      .then(async res => {
+        var responseData = await res.json() 
+        console.log(responseData)
+        setCitiesData(responseData.cities)
+        setFilteredCities(responseData.cities)
+      })
+      .catch(console.warn)
+      .finally(console.log("Avra Avra"))
+    }
+    fetchData()
   }, [])
 
   const handleCityFilter = (filter) => {
