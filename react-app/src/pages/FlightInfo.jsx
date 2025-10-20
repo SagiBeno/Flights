@@ -24,7 +24,9 @@ export default function FlightInfo() {
     <div className="container">
       <h3>Available Flights</h3>
       {/* apply FlightTable */}
-      <FlightTable flights={flights} />
+      {flights.map((flight, index) => (
+        <FlightTable key={index} flight={flight} />
+      ))}
     </div>
   );
 }
