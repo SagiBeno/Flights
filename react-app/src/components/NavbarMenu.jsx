@@ -14,7 +14,8 @@ export default function NavbarMenu({ onLogout }) {
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />
-          Jet4holidays</Navbar.Brand>
+          Jet4holidays
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
