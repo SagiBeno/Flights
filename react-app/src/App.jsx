@@ -5,6 +5,7 @@
 
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Destinations from "./pages/Destinations";
 import FlightInfo from "./pages/FlightInfo";
@@ -31,6 +32,7 @@ export default function App() {
       {loggedIn && <NavbarMenu userName={userName} onLogout={() => setLoggedIn(false)} />}
       <Routes>
         <Route path="/" element={loggedIn ? <Navigate to="/destinations" /> : <Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Registration onRegister={handleLogin} />} /> {/* Login after registration */}
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/flight-info" element={<FlightInfo />} />
         <Route path="/tickets" element={<Tickets />} />

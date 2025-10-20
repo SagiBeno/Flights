@@ -45,6 +45,9 @@ export default function LoginForm(props) {
                 Login
             </Button>
             {invalidLogin && <p className="text-danger mt-3">Invalid email or password</p>}
+            <p className="mt-3">
+                Don't have an account? <a href="/register">Register here</a>
+            </p>
         </Form>
     )
 }
