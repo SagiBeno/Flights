@@ -4,6 +4,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function NavbarMenu({ onLogout, userName }) {
   return (
+    <>
     <Navbar bg="light" expand="lg" className="bg-body-tertiary" fixed="top">
       <Container>
         <Navbar.Brand href="#home">
@@ -17,16 +18,19 @@ export default function NavbarMenu({ onLogout, userName }) {
           Jet4holidays
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/destinations">Destinations</Nav.Link>
             <Nav.Link as={Link} to="/flight-info">Flight Info</Nav.Link>
             <Nav.Link as={Link} to="/tickets">Tickets</Nav.Link>
-            <Nav.Link disabled>Logged in as {userName}</Nav.Link>
-            <Nav.Link onClick={onLogout}>Logout</Nav.Link>
           </Nav>
+          <Navbar.Text>
+              Signed in as: <a href="/" onClick={onLogout} className="logoutButton">{userName}</a>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </>
+    
   );
 }
