@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Form, Row, Col } from "react-bootstrap";
 import DestinationCard from "../components/DestinationCard";
 
-const cities = [
-  { name: "Paris", country: "France", image: "TODO-add-static-img-url-paris.jpg" },
-  { name: "Tokyo", country: "Japan", image: "TODO-add-static-img-url-tokyo.jpg" },
-  { name: "New York", country: "USA", image: "TODO-add-static-img-url-newyork.jpg" },
-  { name: "TODO", country: "GET", image: "cities-from-backend.jpg" },
-];
 
 export default function Destinations() {
-  const [filteredCities, setFilteredCities] = useState(cities);
+  const [citiesData, setCitiesData] = useState([]);
+  const [filteredCities, setFilteredCities] = useState(citiesData);
+
+  useEffect( () => {
+    fetch()
+  }, [])
 
   const handleCityFilter = (filter) => {
     const lowerFilter = filter.toLowerCase();
