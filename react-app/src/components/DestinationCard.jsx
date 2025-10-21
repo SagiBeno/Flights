@@ -8,8 +8,8 @@ export default function DestinationCard(props) {
 
     return (
         <>
-            <Card className="mb-3 shadow-sm">
-                <Card.Img variant="top" src={city.image} />
+            <Card className="mb-3 shadow-sm cards">
+                <Card.Img variant="top" src={city.image} className="card-img" />
                 <Card.Body>
                     <Card.Title>{city.name}</Card.Title>
                     <Card.Text>{city.country}</Card.Text>

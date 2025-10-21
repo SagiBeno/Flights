@@ -44,7 +44,7 @@ export default function Destinations() {
       />
       <Row>
         {filteredCities.map((city, idx) => (
-          <Col key={idx} md={4}>{/* TODO ez ilyen frontendes cuccos lécci Benőőőő :333  alapból volt még rajta: md={4}*/}
+          <Col key={idx} className="cols">
             {/*apply DestinationCard*/}
             <DestinationCard city={city} />
           </Col>
