@@ -69,7 +69,25 @@ app.post("/register", (req, res) => {
 })
 
 app.get("/destinations",(req, res) => {
-
+    conn.connect(connectError => {
+        if(connectError) console.warn(connectError)
+        else {
+            conn.query(`SELECT * FROM destinations`,
+                (err, result, fields) => {
+                    if(err) console.log(err)
+                    else if (result) {
+                        const dest = [...result]
+                        
+                        if (dest.length < 1) res.sendStatus(300)
+                        else {
+                            res.status(200).json(dest)
+                            //console.log(dest)
+                        }
+                        
+                    }
+                })
+        }
+    })
 })
 
 app.get('/flight-info', (req, res) => {
@@ -85,7 +103,7 @@ app.get('/flight-info', (req, res) => {
                         if (flights.length < 1) res.sendStatus(300)
                         else {
                             res.status(200).json(flights)
-                            console.log(flights)
+                            //console.log(flights)
                         }
                         
                     }
