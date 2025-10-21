@@ -1,8 +1,6 @@
 import { Table } from "react-bootstrap";
 
 export default function FlightTable(props) {
-    let flights = props.flights ? props.flights : []
-
     return (
         <>
             <Table striped bordered hover responsive>
@@ -12,10 +10,10 @@ export default function FlightTable(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {flights.map((f, i) => (
+                  {props.flights.map((f, i) => (
                     <tr key={i}>
-                      <td>{f.from}</td>
-                      <td>{f.to}</td>
+                      <td>{f.cityfrom}</td>
+                      <td>{f.cityto}</td>
                       <td>{f.flight}</td>
                       <td>{f.depart}</td>
                       <td>{f.arrive}</td>

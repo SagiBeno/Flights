@@ -13,8 +13,11 @@ export default function FlightInfo() {
 
   const getData = async () => {
     await fetch('http://localhost:3333/flight-info')
-    .then(res => res.json())
-    .then(data => setFlights(data.flights))
+    .then(async res =>  {
+      const data = await res.json()
+      setFlights(data)
+      console.log(data)
+    })
     .catch(console.warn)
   }
 
