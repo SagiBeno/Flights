@@ -1,8 +1,7 @@
 import { Table } from "react-bootstrap";
 
 export default function FlightTable(props) {
-    let flights = props.flight ? [props.flight] : []
-    if (props.flights) flights = props.flights
+    let flights = props.flights ? props.flights : []
 
     return (
         <>

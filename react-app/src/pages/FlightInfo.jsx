@@ -21,9 +21,9 @@ export default function FlightInfo() {
   return (
     <div className="container">
       <h3>Available Flights</h3>
-      {flights.map((flight, index) => (
-        <FlightTable key={index} flight={flight} />
-      ))}
+
+      <FlightTable flights={flights} />
+
     </div>
   );
 }
