@@ -51,22 +51,36 @@ app.post("/login", (req, res) => {
 })
 
 app.post("/register", (req, res) => {
-    console.log(users)
     const { username, email, password } = req.body
-    const existingEmail = users.find(u => u.email === email)
-    const existingUserName = users.find(u => u.username === username)
-    if (existingUserName) {
-        res.status(409).json({ error: "Username already exists" })
-    } 
-    else if (existingEmail) {
-        res.status(409).json({ error: "Email already registered" })
-    } 
-    else {
-        const newUser = { username, email, password }
-        users.push(newUser)
-        res.status(201).json({ user: newUser })
+
+    conn.query(`SELECT username, email FROM accounts WHERE email="${email}" OR username="${username}"`,
+        (err, result, fields) => {
+            if(err) console.log(err)
+            else {
+                const existingEmail = result.find(u => u.email === email)
+                const existingUserName = result.find(u => u.username === username)
+                
+                if (existingUserName) {
+                    res.status(409).json({ error: "Username already exists" })
+                } 
+                else if (existingEmail) {
+                    res.status(409).json({ error: "Email already registered" })
+                }
+                else {
+                    const hashedPassword = bcrypt.hashSync(password, 12)
+
+                    conn.query(`INSERT INTO accounts (username, email, password) VALUES ("${username}", "${email}", "${hashedPassword}")`,
+                        (err, result, fields) => {
+                            if(err) console.log(err)
+                            else {
+                                res.status(201).json({ user: { username, email } })
+                            }
+                        })
+                }
+            }
+        })
     }
-})
+)
 
 app.get("/destinations",(req, res) => {
     conn.connect(connectError => {
