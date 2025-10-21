@@ -57,12 +57,15 @@ app.post("/register", (req, res) => {
         (err, result, fields) => {
             if(err) console.log(err)
             else {
-                console.log(result)
                 const existingEmail = result.find(u => u.email === email)
                 const existingUserName = result.find(u => u.username === username)
+                
                 if (existingUserName) {
                     res.status(409).json({ error: "Username already exists" })
                 } 
+                else if (existingEmail) {
+                    res.status(409).json({ error: "Email already registered" })
+                }
                 else {
                     const hashedPassword = bcrypt.hashSync(password, 12)
 
