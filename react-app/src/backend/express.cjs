@@ -68,15 +68,33 @@ app.post("/register", (req, res) => {
     }
 })
 
-const port = 3333
-
 app.get("/destinations",(req, res) => {
 
 })
 
 app.get('/flight-info', (req, res) => {
+    conn.connect(connectError => {
+        if(connectError) console.warn(connectError)
+        else {
+            conn.query(`SELECT * FROM flights`,
+                (err, result, fields) => {
+                    if(err) console.log(err)
+                    else if (result) {
+                        const flights = [...result]
+                        
+                        if (flights.length < 1) res.sendStatus(300)
+                        else {
+                            res.status(200).json(flights)
+                            console.log(flights)
+                        }
+                        
+                    }
+                })
+        }
+    })
+})  
 
-})
+const port = 3333
 
 app.listen(port, () => {
     console.log("Szerver mükszik itt: " + port)
