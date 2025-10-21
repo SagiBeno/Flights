@@ -1,17 +1,18 @@
 import { Table } from "react-bootstrap";
 import FlightTable from "../components/FlightTable";
-import { useState,useEffect } from "react";
-
-
+import { useState, useEffect } from "react";
+import Spinner from "../components/Spinner";
 
 export default function FlightInfo() {
   const [flights, setFlights] = useState([]);
+  const [isLoading, setLoading] = useState(false)
 
   useEffect( () => {
     getData();
   }, [])
 
   const getData = async () => {
+    setLoading(true)
     await fetch('http://localhost:3333/flight-info')
     .then(async res =>  {
       const data = await res.json()
@@ -19,6 +20,7 @@ export default function FlightInfo() {
       console.log(data)
     })
     .catch(console.warn)
+    .finally(setLoading(false))
   }
 
   return (
@@ -26,7 +28,10 @@ export default function FlightInfo() {
       <h3>Available Flights</h3>
 
       <FlightTable flights={flights} />
-
+      
+      {
+        isLoading && <Spinner />
+      }
     </div>
   );
 }
