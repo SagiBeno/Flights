@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 export default function TicketForm(props) {
     //name nem null
@@ -30,6 +30,18 @@ export default function TicketForm(props) {
         console.log(e.target);
     };
 
+    const handleReset = e => {
+        e.preventDefault();
+        setFromPicked("");
+        setToPicked("");
+        setDatePicked("");
+
+        const formElements = e.target.form.elements;
+        formElements[1].value = "From";
+        formElements[2].value = "To";
+        formElements[3].value = "Date";
+    }
+
     return (
         <>
             <h3>Book a Ticket</h3>
@@ -38,24 +50,34 @@ export default function TicketForm(props) {
                 <Form.Control className="mb-2" as="select" onChange={e => setFromPicked(e.target.value)}>
                     {!fromPicked && <option>From</option>}
                     {flights.map((flight, idx) => {
-                        //TODO impelement date
-                        if(!toPicked){
+                        if(flight.to === toPicked && datePicked === flight.depart){
                             return <option key={idx} value={flight.from}>{flight.from}</option>
                         }
-                        else{
-                            return flight.to === toPicked ? <option key={idx} value={flight.from}>{flight.from}</option> : null
+                        else if(!datePicked && toPicked === flight.to){
+                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                        }
+                        else if(!toPicked && datePicked === flight.depart){
+                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                        }
+                        else if(!toPicked && !datePicked){
+                            return <option key={idx} value={flight.from}>{flight.from}</option>
                         }
                     })}
                 </Form.Control>
                 <Form.Control className="mb-2" as="select" onChange={e => setToPicked(e.target.value)}>
                     {!toPicked && <option>To</option>}
                     {flights.map((flight, idx) => {
-                        //TODO impelement date
-                        if(!fromPicked){
+                        if(flight.from === fromPicked && datePicked === flight.depart){
                             return <option key={idx} value={flight.to}>{flight.to}</option>
                         }
-                        else{
-                            return flight.from === fromPicked ? <option key={idx} value={flight.to}>{flight.to}</option> : null
+                        else if(!datePicked && fromPicked === flight.from){
+                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                        }
+                        else if(!fromPicked && datePicked === flight.depart){
+                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                        }
+                        else if(!fromPicked && !datePicked){
+                            return <option key={idx} value={flight.to}>{flight.to}</option>
                         }
                     })}
                 </Form.Control>
@@ -65,18 +87,31 @@ export default function TicketForm(props) {
                         if(flight.from === fromPicked && flight.to === toPicked){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
-                        else if(fromPicked && !toPicked){
+                        else if(fromPicked === flight.from && !toPicked){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
-                        else if(!fromPicked && toPicked){
+                        else if(!fromPicked && toPicked === flight.to){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
-                        else{
+                        else if(!fromPicked && !toPicked){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
                     })}
                 </Form.Control>
-                <Button type="submit">Add to Basket</Button>
+                <Row>
+                    <Col>
+                        <Button variant="primary" type="submit">
+                            Book Ticket
+                        </Button>
+                    </Col>
+
+                    <Col>
+                        <Button variant="secondary" className="ms-2" onClick={handleReset}>
+                            Reset
+                        </Button>
+                    </Col>
+                </Row>
+                
             </Form>
         </>
     )
