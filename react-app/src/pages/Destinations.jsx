@@ -14,15 +14,17 @@ export default function Destinations() {
       })
       .then(async res => {
         var responseData = await res.json() 
-        console.log(responseData)
-        setCitiesData(responseData.cities)
-        setFilteredCities(responseData.cities)
+        //console.log(responseData)
+        setCitiesData(responseData)
+        setFilteredCities(responseData)
       })
       .catch(console.warn)
       .finally(console.log("Avra Avra"))
     }
     fetchData()
   }, [])
+
+  //console.log(citiesData)
 
   const handleCityFilter = (filter) => {
     const lowerFilter = filter.toLowerCase();
@@ -33,6 +35,8 @@ export default function Destinations() {
     console.log("Filtered Cities:", filtered);
     setFilteredCities(filtered);
   }
+
+  //console.log(filteredCities)
 
   return (
     <div className="container">
