@@ -24,6 +24,9 @@ export default function LoginForm(props) {
                 const data = await response.json();
                 props.onLogin(data.user);
             } 
+            else{
+                setInvalidLogin(true);
+            }
         })
         .catch(error => {
             console.error('Error during login:', error);
