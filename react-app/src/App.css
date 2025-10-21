@@ -70,6 +70,10 @@ body {
   object-fit: cover;
 }
 
+#spinner {
+  margin: 0 auto;
+}
+
 @media (max-width: 800px) {
   .cards {
     height: 300px;

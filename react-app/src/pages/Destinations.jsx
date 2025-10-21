@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Card, Form, Row, Col } from "react-bootstrap";
 import DestinationCard from "../components/DestinationCard";
-
+import Spinner from "../components/Spinner";
 
 export default function Destinations() {
   const [citiesData, setCitiesData] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]);
+  const [isLoading, setLoading] = useState(false)
 
   useEffect( () => {
     async function fetchData() {
+      setLoading(true)
       await fetch("http://localhost:3333/destinations", {
         method: "GET"
       })
@@ -19,7 +21,7 @@ export default function Destinations() {
         setFilteredCities(responseData.cities)
       })
       .catch(console.warn)
-      .finally(console.log("Avra Avra"))
+      .finally(setLoading(false))
     }
     fetchData()
   }, [])
@@ -50,6 +52,10 @@ export default function Destinations() {
           </Col>
         ))}
       </Row>
+
+      {
+        isLoading && <Spinner />
+      }
     </div>
   );
 }
