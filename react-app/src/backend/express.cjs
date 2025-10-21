@@ -22,6 +22,7 @@ app.post("/login", (req, res) => {
 })
 
 app.post("/register", (req, res) => {
+    console.log(users)
     const { username, email, password } = req.body
     const existingEmail = users.find(u => u.email === email)
     const existingUserName = users.find(u => u.username === username)

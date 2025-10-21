@@ -31,7 +31,7 @@ export default function App() {
       {loggedIn && <NavbarMenu userName={userName} onLogout={() => setLoggedIn(false)} />}
       <Routes>
         <Route path="/" element={loggedIn ? <Navigate to="/destinations" /> : <Login onLogin={handleLogin} />} />
-        <Route path="/register" element={<Registration onRegister={handleLogin} />} /> {/* Login after registration */}
+        <Route path="/register" element={loggedIn ? <Navigate to="/destinations" /> : <Registration onRegister={handleLogin} />} /> {/* Login after registration */}
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/flight-info" element={<FlightInfo />} />
         <Route path="/tickets" element={<Tickets />} />
