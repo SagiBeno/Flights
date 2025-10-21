@@ -3,6 +3,7 @@ const app = express()
 const cors = require("cors")
 const path = require("path")
 const mysql = require("mysql2")
+const bcrypt = require("bcrypt")
 
 app.use(express.json())
 app.use(cors())
@@ -23,16 +24,15 @@ app.post("/login", (req, res) => {
         if(connectError) console.warn(connectError)
         else {
             //console.log("Sikeres connect")
-            conn.query(`SELECT username, email, password FROM accounts WHERE email="${email}" AND password="${password}"`,
-                (err, result, fields) => {
+            conn.query(`SELECT username, email, password FROM accounts WHERE email="${email}"`,
+                async (err, result, fields) => {
                     if(err) console.log(err)
                     else if (result) {
                         const users = [...result]
-                        
 
-                        if (users.length < 1) res.status(300).json({login: false})
+                        if (users.length < 1 || !(await bcrypt.compare(password, users[0].password))) res.status(300).json({login: false})
                         else {
-                            res.status(200).json({login: true, username: result.username})
+                            res.status(200).json({login: true, username: users[0].username})
                         }
                         
                     }
