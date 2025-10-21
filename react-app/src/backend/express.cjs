@@ -21,7 +21,23 @@ app.post("/login", (req, res) => {
     }
 })
 
-//TODO app.post(/register
+app.post("/register", (req, res) => {
+    console.log(users)
+    const { username, email, password } = req.body
+    const existingEmail = users.find(u => u.email === email)
+    const existingUserName = users.find(u => u.username === username)
+    if (existingUserName) {
+        res.status(409).json({ error: "Username already exists" })
+    } 
+    else if (existingEmail) {
+        res.status(409).json({ error: "Email already registered" })
+    } 
+    else {
+        const newUser = { username, email, password }
+        users.push(newUser)
+        res.status(201).json({ user: newUser })
+    }
+})
 
 const port = 3333
 
