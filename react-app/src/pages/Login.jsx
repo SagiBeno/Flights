@@ -3,8 +3,8 @@ import LoginForm from "../components/LoginForm";
 import { Card } from "react-bootstrap";
 
 export default class Login extends Component {
-    handleLogin = e => {
-        this.props.onLogin(e);
+    handleLogin = data => {
+        this.props.onLogin(data);
     }
 
     render() {
