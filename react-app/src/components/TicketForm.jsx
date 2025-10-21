@@ -15,8 +15,8 @@ export default function TicketForm(props) {
         fetch('http://localhost:3333/flight-info')
             .then(async response => {
                 const data = await response.json()
-                setFlights(data.flights)
-                console.log(data.flights);
+                setFlights(data)
+                //console.log(data.flights);
             })
             .catch(console.warn);
     }, []);
@@ -47,47 +47,47 @@ export default function TicketForm(props) {
                 <Form.Control className="mb-2" as="select" onChange={e => setFromPicked(e.target.value)}>
                     {!fromPicked && <option>From</option>}
                     {flights.map((flight, idx) => {
-                        if(flight.to === toPicked && datePicked === flight.depart){
-                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                        if(flight.cityto === toPicked && datePicked === flight.depart){
+                            return <option key={idx} value={flight.cityfrom}>{flight.cityfrom}</option>
                         }
-                        else if(!datePicked && toPicked === flight.to){
-                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                        else if(!datePicked && toPicked === flight.cityto){
+                            return <option key={idx} value={flight.cityfrom}>{flight.cityfrom}</option>
                         }
                         else if(!toPicked && datePicked === flight.depart){
-                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                            return <option key={idx} value={flight.cityfrom}>{flight.cityfrom}</option>
                         }
                         else if(!toPicked && !datePicked){
-                            return <option key={idx} value={flight.from}>{flight.from}</option>
+                            return <option key={idx} value={flight.cityfrom}>{flight.cityfrom}</option>
                         }
                     })}
                 </Form.Control>
                 <Form.Control className="mb-2" as="select" onChange={e => setToPicked(e.target.value)}>
                     {!toPicked && <option>To</option>}
                     {flights.map((flight, idx) => {
-                        if(flight.from === fromPicked && datePicked === flight.depart){
-                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                        if(flight.cityfrom === fromPicked && datePicked === flight.depart){
+                            return <option key={idx} value={flight.cityto}>{flight.cityto}</option>
                         }
-                        else if(!datePicked && fromPicked === flight.from){
-                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                        else if(!datePicked && fromPicked === flight.cityfrom){
+                            return <option key={idx} value={flight.cityto}>{flight.cityto}</option>
                         }
                         else if(!fromPicked && datePicked === flight.depart){
-                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                            return <option key={idx} value={flight.cityto}>{flight.cityto}</option>
                         }
                         else if(!fromPicked && !datePicked){
-                            return <option key={idx} value={flight.to}>{flight.to}</option>
+                            return <option key={idx} value={flight.cityto}>{flight.cityto}</option>
                         }
                     })}
                 </Form.Control>
                 <Form.Control className="mb-2" as="select" onChange={e => setDatePicked(e.target.value)}>
                     {!datePicked && <option>Date</option>}
                     {flights.map((flight, idx) => {
-                        if(flight.from === fromPicked && flight.to === toPicked){
+                        if(flight.cityfrom === fromPicked && flight.cityto === toPicked){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
-                        else if(fromPicked === flight.from && !toPicked){
+                        else if(fromPicked === flight.cityfrom && !toPicked){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
-                        else if(!fromPicked && toPicked === flight.to){
+                        else if(!fromPicked && toPicked === flight.cityto){
                             return <option key={idx} value={flight.depart}>{flight.depart}</option>
                         }
                         else if(!fromPicked && !toPicked){
