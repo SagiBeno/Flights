@@ -2,11 +2,8 @@ import { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 export default function TicketForm(props) {
-    //name nem null
-    //from, to létező hely a backendből
-    //data nem null és jövőbeli
+    const [form, setForm] = useState({ name: "", from: "", to: "", date: "", amount: 1 });
 
-    const [form, setForm] = useState({ name: "", from: "", to: "", date: "" });
     const [fromPicked, setFromPicked] = useState("");
     const [toPicked, setToPicked] = useState("");
     const [datePicked, setDatePicked] = useState("");
@@ -27,7 +24,7 @@ export default function TicketForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        console.log(e.target);
+        props.onSubmit(e);
     };
 
     const handleReset = e => {
