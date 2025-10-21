@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 
 export default function FlightTable(props) {
     return (
-        <>
+          <>      
             <Table striped bordered hover responsive>
                 <thead>
                   <tr>
@@ -22,6 +22,6 @@ export default function FlightTable(props) {
                   ))}
                 </tbody>
             </Table>
-        </>
+        </> 
     )
 }

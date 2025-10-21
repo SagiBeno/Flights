@@ -23,8 +23,8 @@ export default function TicketForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (e.target[1].value != 'From' && e.target[2].value != 'To' && e.target[3].value != 'Date') props.onSubmit(e);
 
-        props.onSubmit(e);
     };
 
     const handleReset = e => {
@@ -42,8 +42,9 @@ export default function TicketForm(props) {
     return (
         <>
             <h3>Book a Ticket</h3>
+
             <Form onSubmit={handleSubmit}>
-                <Form.Control placeholder="Name" className="mb-2" />
+                <Form.Control placeholder="Name" className="mb-2" required />
                 <Form.Control className="mb-2" as="select" onChange={e => setFromPicked(e.target.value)}>
                     {!fromPicked && <option>From</option>}
                     {flights.map((flight, idx) => {
@@ -96,19 +97,13 @@ export default function TicketForm(props) {
                     })}
                 </Form.Control>
                 <Row>
-                    <Col>
-                        <Button variant="primary" type="submit">
-                            Book Ticket
-                        </Button>
-                    </Col>
-
-                    <Col>
-                        <Button variant="secondary" className="ms-2" onClick={handleReset}>
-                            Reset
-                        </Button>
-                    </Col>
+                    <Button variant="primary" type="submit" className="mb-1">
+                        Book Ticket
+                    </Button>
+                    <Button variant="secondary" onClick={handleReset}>
+                        Reset
+                    </Button>
                 </Row>
-                
             </Form>
         </>
     )

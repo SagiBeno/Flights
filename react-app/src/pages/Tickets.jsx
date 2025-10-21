@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ListGroup, Card } from "react-bootstrap";
+import { ListGroup, Card, Row, Col } from "react-bootstrap";
 
 import TicketForm from "../components/TicketForm.jsx";
 
@@ -19,23 +19,28 @@ export default function Tickets() {
 
   return (
     <div className="container">
-      <Card>
-        <Card.Body>
-          <TicketForm onSubmit={handleSubmit} />
-        </Card.Body>
-      </Card>
+      <Row>
+        <Col>
+          <Card className="mb-2 TicketsCards overflowHidden">
+            <Card.Body>
+              <TicketForm onSubmit={handleSubmit} />
+            </Card.Body>
+          </Card>
+        </Col>
       
-
-      <Card>
-        <Card.Body>
-          <h4 className="mt-4">Your Basket</h4>
-          <ListGroup>
-            {basket.map((b, i) => (
-              <ListGroup.Item key={i}>{`${b.name}: ${b.from} → ${b.to} on ${b.date}`}</ListGroup.Item>
-            ))}
-          </ListGroup>
-        </Card.Body>
-      </Card>
+        <Col>
+          <Card className="TicketsCards">
+            <Card.Body>
+              <h4>Your Basket</h4>
+              <ListGroup>
+                {basket.map((b, i) => (
+                  <ListGroup.Item key={i}>{`${b.name}: ${b.from} → ${b.to} on ${b.date}`}</ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col> 
+      </Row>
     </div>
   );
 }

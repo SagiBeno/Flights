@@ -74,6 +74,17 @@ body {
   margin: 0 auto;
 }
 
+.TicketsCards {
+  overflow-y: auto;
+  height: 400px;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.overflowHidden {
+  overflow: hidden;
+}
+
 @media (max-width: 800px) {
   .cards {
     height: 400px;
