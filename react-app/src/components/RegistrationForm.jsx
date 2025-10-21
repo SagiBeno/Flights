@@ -35,6 +35,10 @@ export default function RegistrationForm(props) {
                 const data = await response.json();
                 props.onLogin(data.user);
             } 
+            else{
+                const errorData = await response.json();
+                setInvalidRegistration(errorData.message || 'Registration failed');
+            }
         })
         .catch(error => {
             console.error('Error during registration:', error);
