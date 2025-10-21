@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const path = require("path")
+const mysql = require("mysql2")
 
 app.use(express.json())
 app.use(cors())
@@ -11,14 +12,47 @@ const users = [ //TODO adatbázis kéne ide sztem
     { username: 'JohnDoe', email: 'JohnDoe@example.com' , password: '12345678' }
 ]
 
+const conn = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "flights"
+})
+
 app.post("/login", (req, res) => {
-    const { email, password } = req.body
+    const {email, password} = req.body
+    //console.log("Login data: ", email, password)
+
+    conn.connect(connectError => {
+        if(connectError) console.warn(connectError)
+        else {
+            //console.log("Sikeres connect")
+            conn.query(`SELECT username, email, password FROM accounts WHERE email="${email}" AND password="${password}"`),
+                (err, result, fields) => {
+                    console.log("Result: ", result)
+                    if(err) console.warn(err)
+                    else if (result) {
+                        users = [...result]
+                        console.log("users", users)
+
+                        if (users.length < 1) res.status(300).json({login: false})
+                        else {
+                            console.log(result)
+                        }
+                        
+                    }
+                }
+        }
+    })
+
+
+    /*const { email, password } = req.body
     const user = users.find(u => u.email === email && u.password === password)
     if (user) {
         res.status(200).json({ user })
     } else {
         res.sendStatus(401)
-    }
+    }*/
 })
 
 //TODO app.post(/register
