@@ -22,7 +22,7 @@ export default function LoginForm(props) {
         .then(async response => {
             if (response.ok) {
                 const data = await response.json();
-                props.onLogin({login: data.login, username: data.username});
+                props.onLogin(data.username);
             } 
             else{
                 setInvalidLogin(true);

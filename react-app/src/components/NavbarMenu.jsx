@@ -1,6 +1,5 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function NavbarMenu({ onLogout, userName }) {
   return (

@@ -22,8 +22,8 @@ export default function App() {
   const [userName, setUserName] = useState("");
 
   const handleLogin = data => {
-    setLoggedIn(data.login);
-    setUserName(data.username)
+    setLoggedIn(true)
+    setUserName(data)
   }
 
   return (

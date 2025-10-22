@@ -85,6 +85,14 @@ body {
   overflow: hidden;
 }
 
+.table-responsive {
+    overflow-x: scroll !important;
+}
+
+table {
+  overflow-x: scroll !important;
+}
+
 @media (max-width: 800px) {
   .cards {
     height: 400px;
@@ -94,4 +102,5 @@ body {
     height: 80%;
     object-fit: cover;
   }
+  
 }

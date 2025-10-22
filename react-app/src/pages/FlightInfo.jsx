@@ -17,7 +17,7 @@ export default function FlightInfo() {
     .then(async res =>  {
       const data = await res.json()
       setFlights(data)
-      console.log(data)
+      //console.log(data)
     })
     .catch(console.warn)
     .finally(setLoading(false))
