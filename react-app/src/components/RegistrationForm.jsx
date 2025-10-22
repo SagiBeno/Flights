@@ -33,7 +33,7 @@ export default function RegistrationForm(props) {
         .then(async response => {
             if (response.ok) {
                 const data = await response.json();
-                props.onRegister(data.user);
+                props.onRegister(data.username);
                                            
             } 
             else{

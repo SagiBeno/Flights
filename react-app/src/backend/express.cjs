@@ -73,7 +73,7 @@ app.post("/register", (req, res) => {
                         (err, result, fields) => {
                             if(err) console.log(err)
                             else {
-                                res.status(201).json({ user: { username, email } })
+                                res.status(201).json({ login: true, username: username })
                             }
                         })
                 }
