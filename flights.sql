@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Okt 21. 19:22
+-- Létrehozás ideje: 2025. Okt 22. 07:47
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -38,7 +38,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`username`, `email`, `password`) VALUES
-('JohnDoe', 'JohnDoe@example.com', '12345678');
+('JohnDoe', 'JohnDoe@example.com', '$2a$12$Bvb7MjKxYZM1rvSa5M5GbuoyKzMrOE8tTR/d1Zw1ze0sJn2KfrFcm');
 
 -- --------------------------------------------------------
 
